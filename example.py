@@ -1,5 +1,4 @@
 from MatrixConverter import MatrixConverter
-from LU import LU_CPU, LU_GPU
 
 
 matrix_list = [
@@ -23,6 +22,3 @@ converter.print_matrix()
 converter.numpy_to_list()
 print("\nList Matrix:")
 converter.print_matrix()
-
-print(LU_CPU(matrix_list))
-print(LU_GPU(matrix_list))
