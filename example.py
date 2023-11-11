@@ -1,24 +1,23 @@
 from MatrixConverter import MatrixConverter
 
 
+# Example usage
 matrix_list = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9]
+    [4, 0, 0],
+    [0, 5, 0],
+    [0, 0, 6]
 ]
-
 converter = MatrixConverter(matrix_list)
 
-# Wyświetlanie macierzy w oryginalnej reprezentacji
-print("Original Matrix:")
+# Convert to CSR and print
+values, row_indices, column_pointers = converter.to_csr()
+print("CSR Format:", values, row_indices, column_pointers)
+
+# Convert back from CSR and print
+converter.from_csr(values, row_indices, column_pointers)
 converter.print_matrix()
 
-# Konwersja listy na macierz NumPy
-converter.list_to_matrix(matrix_list)
-print("\nNumPy Matrix:")
-converter.print_matrix()
-
-# Konwersja macierzy NumPy na listę
-converter.numpy_to_list()
-print("\nList Matrix:")
-converter.print_matrix()
+# LU Decomposition
+L, U = converter.lu_decomposition()
+print("L Matrix:\n", L)
+print("U Matrix:\n", U)
