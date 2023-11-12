@@ -1,28 +1,28 @@
-from MatrixConverter import MatrixConverter
+from MatrixConverter import *
 from LU import LU_CPU, LU_GPU
 
 
-matrix_list = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9]
+# Example usage
+example_matrix = [
+    [10, 0, 0, 0],
+    [0, 20, 0, 0],
+    [0, 0, 30, 0],
+    [0, 0, 0, 40]
 ]
 
-converter = MatrixConverter(matrix_list)
+# Convert to CSR and back
+csr_values, csr_row_indices, csr_column_pointers = matrix_to_csr(example_matrix)
+restored_matrix_from_csr = csr_to_matrix(csr_values, csr_row_indices, csr_column_pointers)
 
-# Wyświetlanie macierzy w oryginalnej reprezentacji
-print("Original Matrix:")
-converter.print_matrix()
+# Convert to CSC and back
+csc_values, csc_column_indices, csc_row_pointers = matrix_to_csc(example_matrix)
+restored_matrix_from_csc = csc_to_matrix(csc_values, csc_column_indices, csc_row_pointers)
 
-# Konwersja listy na macierz NumPy
-converter.list_to_matrix(matrix_list)
-print("\nNumPy Matrix:")
-converter.print_matrix()
+print("Original Matrix:", example_matrix)
+print(f"CSR \nV: {csr_values} \nCOL_INDEX: {csr_row_indices} \nROW_INDEX: {csr_column_pointers}")
+print("Restored from CSR:\n", restored_matrix_from_csr)
+print(f"CSC \nV: {csc_values} \nCOL_INDEX: {csc_column_indices} \nROW_INDEX: {csc_row_pointers}")
+print("Restored from CSC:\n", restored_matrix_from_csc)
 
-# Konwersja macierzy NumPy na listę
-converter.numpy_to_list()
-print("\nList Matrix:")
-converter.print_matrix()
-
-print(LU_CPU(matrix_list))
-print(LU_GPU(matrix_list))
+print(LU_CPU(example_matrix))
+print(LU_GPU(example_matrix))
